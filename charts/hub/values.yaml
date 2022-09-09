@@ -1,1 +1,6 @@
+---
+managed1:
+  name: cluster1
 
+managed2:
+  name: cluster2
