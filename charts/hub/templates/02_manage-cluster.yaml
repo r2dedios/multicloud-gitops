@@ -5,6 +5,7 @@ metadata:
   labels:
     cloud: auto-detect
     vendor: auto-detect
+    cluster.open-cluster-management.io/clusterset: {{ .Values.managed1.clusterset }}
 spec:
   hubAcceptsClient: true
 
@@ -16,6 +17,7 @@ metadata:
   labels:
     cloud: auto-detect
     vendor: auto-detect
+    cluster.open-cluster-management.io/clusterset: {{ .Values.managed2.clusterset }}
 spec:
   hubAcceptsClient: true
 
