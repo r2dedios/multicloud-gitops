@@ -3,6 +3,8 @@ kind: KlusterletAddonConfig
 metadata:
   name: {{ .Values.managed1.name }}
   namespace: {{ .Values.managed1.name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   applicationManager:
     enabled: true
@@ -20,6 +22,8 @@ kind: KlusterletAddonConfig
 metadata:
   name: {{ .Values.managed1.name }}
   namespace: {{ .Values.managed1.name }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   applicationManager:
     enabled: true
