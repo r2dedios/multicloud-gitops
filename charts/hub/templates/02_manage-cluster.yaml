@@ -8,6 +8,7 @@ metadata:
     cloud: auto-detect
     vendor: auto-detect
     cluster.open-cluster-management.io/clusterset: {{ .Values.managed1.clusterset }}
+    clusterGroup: aws
 spec:
   hubAcceptsClient: true
 
@@ -22,6 +23,7 @@ metadata:
     cloud: auto-detect
     vendor: auto-detect
     cluster.open-cluster-management.io/clusterset: {{ .Values.managed2.clusterset }}
+    clusterGroup: aws
 spec:
   hubAcceptsClient: true
 

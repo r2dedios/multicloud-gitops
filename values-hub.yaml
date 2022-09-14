@@ -94,7 +94,7 @@ clusterGroup:
       # verbosity: "-v"
 
   managedClusterGroups:
-    region-one:
+  - region-one:
       name: region-one
       helmOverrides:
       - name: clusterGroup.isHubCluster
@@ -102,6 +102,14 @@ clusterGroup:
       clusterSelector:
         matchLabels:
           clusterGroup: region-one
+  - aws:
+      name: aws
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      clusterSelector:
+        matchLabels:
+          clusterGroup: aws
 
 #  To have apps in multiple flavors, use namespaces and use helm overrides as appropriate
 #
