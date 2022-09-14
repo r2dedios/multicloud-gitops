@@ -20,8 +20,8 @@ spec:
 apiVersion: agent.open-cluster-management.io/v1
 kind: KlusterletAddonConfig
 metadata:
-  name: {{ .Values.managed1.name }}
-  namespace: {{ .Values.managed1.name }}
+  name: {{ .Values.managed2.name }}
+  namespace: {{ .Values.managed2.name }}
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
