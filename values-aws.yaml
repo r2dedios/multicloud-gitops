@@ -1,0 +1,23 @@
+global:
+  options:
+    useCSV: False
+    syncPolicy: Automatic
+    installPlanApproval: Automatic
+
+clusterGroup:
+  name: aws
+  isHubCluster: false
+
+  namespaces:
+    - openshift-storage
+
+  subscriptions:
+
+  projects:
+    - odf
+
+  applications:
+  - name: odf
+    namespace: openshift-storage
+    project: odf
+    path: charts/aws/odf
