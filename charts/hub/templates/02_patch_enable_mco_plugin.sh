@@ -17,7 +17,7 @@ spec:
             - -c
             - |
               echo "Patching the console to enable MCO console plugin"
-              oc patch consoles.operator.openshift.io cluster -n openshift-storage --patch '{ "spec": { "plugins": ["odf-multicluster-console"] } }' --type=merge
+              oc patch console.operator cluster -n openshift-storage --type json -p '[{"op": "add", "path": "/spec/plugins", "value": ["odf-multicluster-console"]}]'
               if [ $? = 0 ]
               then
                   echo "MCO console enabled, patch was applied ok"
