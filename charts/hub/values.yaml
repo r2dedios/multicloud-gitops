@@ -13,3 +13,6 @@ managed2:
   pwd: def
   clusterset: replica
 
+secretStore:
+  name: vault-backend
+  kind: ClusterSecretStore
