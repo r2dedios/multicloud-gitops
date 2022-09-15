@@ -16,17 +16,6 @@ rules:
   - apiGroups:
       - ""
       - "ocs.openshift.io"
-    resources:
-      - nodes
-      - consoles
-      - storageclusters
-    verbs:
-      - get
-      - list
-      - patch
-      - update
-      - watch
-  - apiGroups:
       - "operator.openshift.io"
     resources:
       - consoles
