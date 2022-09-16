@@ -11,6 +11,7 @@ clusterGroup:
   - golang-external-secrets
   - config-demo
   - openshift-storage
+  - busybox-ns
 
   subscriptions:
     acm:
