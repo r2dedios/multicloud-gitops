@@ -19,4 +19,4 @@ spec:
   - 2m
   - 5m
   - 15m
-
+  type: async
