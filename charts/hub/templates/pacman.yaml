@@ -64,4 +64,4 @@ metadata:
 spec:
   clusterSelector:
     matchLabels:
-      'name': 'cluster1'
+      'name': {{ .Values.managed1.name | quote }}
