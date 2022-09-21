@@ -1,0 +1,67 @@
+apiVersion: v1                    
+kind: Namespace
+metadata:
+  name: pacman                             
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: pacman
+  namespace: pacman
+spec:
+  componentKinds:
+  - group: apps.open-cluster-management.io
+    kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: 
+          - pacman
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ggithubcom-gmidha1-application-samples-ns
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  annotations:
+    apps.open-cluster-management.io/reconcile-rate: medium
+  name: ggithubcom-gmidha1-application-samples
+  namespace: ggithubcom-gmidha1-application-samples-ns
+spec:
+  type: Git
+  pathname: 'https://github.com/gmidha1/application-samples'
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  annotations:
+    apps.open-cluster-management.io/git-branch: rdrtest
+    apps.open-cluster-management.io/git-path: pacman
+    apps.open-cluster-management.io/reconcile-option: merge
+  labels:
+    app: pacman
+  name: pacman-subscription-1
+  namespace: pacman
+spec:
+  channel: ggithubcom-gmidha1-application-samples-ns/ggithubcom-gmidha1-application-samples
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: pacman-placement-1
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: pacman
+  name: pacman-placement-1
+  namespace: pacman
+spec:
+  clusterSelector:
+    matchLabels:
+      'name': 'cluster1'
