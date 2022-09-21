@@ -2,18 +2,18 @@ apiVersion: ramendr.openshift.io/v1alpha1
 kind: DRPlacementControl
 metadata:
   labels:
-    app: busybox
+    app: pacman
     cluster.open-cluster-management.io/backup: resource
-  name: busybox-placement-1-drpc
+  name: pacman-placement-1-drpc
   annotations:
     argocd.argoproj.io/sync-wave: "5"
-  namespace: busybox-ns
+  namespace: pacman
 spec:
   drPolicyRef:
-    name: drsync5m
+    name: drsync2m
   placementRef:
     kind: PlacementRule
-    name: busybox-placement
-    namespace: busybox-ns
+    name: pacman-placement-1
+    namespace: pacman
   preferredCluster: {{ .Values.managed1.name }}
   pvcSelector: {}
