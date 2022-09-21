@@ -65,3 +65,4 @@ spec:
   clusterSelector:
     matchLabels:
       'name': {{ .Values.managed1.name | quote }}
+  schedulerName: ramen
