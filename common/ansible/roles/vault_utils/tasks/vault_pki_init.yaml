@@ -6,6 +6,7 @@
   kubernetes.core.k8s_info:
     kind: Ingress
     api_version: config.openshift.io/v1
+    validate_certs: no
   register: ingress_domain_raw
 
 # We split the domain and skip the first two parts
@@ -24,27 +25,32 @@
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
     command: vault secrets enable pki
+    validate_certs: no
 
 - name: Set vault pki max-lease-ttl
   kubernetes.core.k8s_exec:
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
     command: vault secrets tune --max-lease-ttl="{{ vault_pki_max_lease_ttl }}" pki
+    validate_certs: no
 
 - name: Set vault pki generate/internal CN
   kubernetes.core.k8s_exec:
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
     command: vault write pki/root/generate/internal common_name="{{ ingress_domain }}" ttl="{{ vault_pki_max_lease_ttl }}"
+    validate_certs: no
 
 - name: Set vault pki CRL
   kubernetes.core.k8s_exec:
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
     command: vault write pki/config/urls issuing_certificates="http://127.0.0.1:8200/v1/pki/ca" crl_distribution_points="http://127.0.0.1:8200/v1/pki/crl"
+    validate_certs: no
 
 - name: Set vault pki roles
   kubernetes.core.k8s_exec:
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
     command: vault write pki/roles/"{{ cert_role }}" allowed_domains="{{ ingress_domain }}" allow_subdomains=true max_ttl="{{ vault_pki_max_lease_ttl }}"
+    validate_certs: no

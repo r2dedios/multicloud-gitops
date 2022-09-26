@@ -4,6 +4,7 @@
   kubernetes.core.k8s_info:
     kind: Namespace
     name: "{{ vault_ns }}"
+    validate_certs: no
   register: vault_ns_rc
   until: vault_ns_rc.resources | length > 0
   retries: 20
@@ -14,6 +15,7 @@
     kind: Pod
     namespace: "{{ vault_ns }}"
     name: "{{ vault_pod }}"
+    validate_certs: no
   register: vault_pod_rc
   until: vault_pod_rc.resources | length > 0
   retries: 20
@@ -27,6 +29,7 @@
   kubernetes.core.k8s_exec:
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
+    validate_certs: no
     command: vault status -format=json
   register: vault_status_json
   until: "'rc' in vault_status_json"
@@ -43,6 +46,7 @@
   kubernetes.core.k8s_info:
     namespace: "{{ vault_ns }}"
     kind: Pod
+    validate_certs: no
     label_selectors:
       - "component = server"
   register: vault_pods_list

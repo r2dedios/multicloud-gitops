@@ -11,6 +11,7 @@
     kind: Pod
     namespace: "{{ vault_ns }}"
     name: "{{ item }}"
+    validate_certs: no
   loop: "{{ vault_pods }}"
 
 - name: Delete vault pvc
@@ -20,4 +21,5 @@
     kind: PersistentVolumeClaim
     namespace: "{{ vault_ns }}"
     name: "data-{{ item }}"
+    validate_certs: no
   loop: "{{ vault_pods }}"

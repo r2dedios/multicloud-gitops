@@ -41,6 +41,7 @@
     namespace: "{{ vault_ns }}"
     pod: "{{ vault_pod }}"
     command: vault operator init -format=json
+    validate_certs: no
   register: vault_init_json_out
   until: vault_init_json_out is not failed
   retries: 10
@@ -71,6 +72,7 @@
 - name: Save vault operator output (into a secret inside the cluster)
   kubernetes.core.k8s:
     state: present
+    validate_certs: no
     definition:
       apiVersion: v1
       kind: Secret
