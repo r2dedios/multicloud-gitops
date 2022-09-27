@@ -1,13 +1,17 @@
 apiVersion: v1                    
 kind: Namespace
 metadata:
-  name: pacman                             
+  name: pacman
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"  
 ---
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
   name: pacman
   namespace: pacman
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   componentKinds:
   - group: apps.open-cluster-management.io
@@ -24,11 +28,14 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: ggithubcom-gmidha1-application-samples-ns
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
   annotations:
+    argocd.argoproj.io/sync-wave: "4"
     apps.open-cluster-management.io/reconcile-rate: medium
   name: ggithubcom-gmidha1-application-samples
   namespace: ggithubcom-gmidha1-application-samples-ns
@@ -43,6 +50,7 @@ metadata:
     apps.open-cluster-management.io/git-branch: rdrtest
     apps.open-cluster-management.io/git-path: pacman
     apps.open-cluster-management.io/reconcile-option: merge
+    argocd.argoproj.io/sync-wave: "4"
   labels:
     app: pacman
   name: pacman-subscription-1
@@ -59,6 +67,8 @@ kind: PlacementRule
 metadata:
   labels:
     app: pacman
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
   name: pacman-placement-1
   namespace: pacman
 spec:
