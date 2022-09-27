@@ -9,8 +9,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
   namespace: pacman
 spec:
-  #action: Failover
-  #failoverCluster: {{ .Values.managed2.name }}
+  action: Failover
+  failoverCluster: {{ .Values.managed2.name }}
   drPolicyRef:
     name: drsync2m
   placementRef:
