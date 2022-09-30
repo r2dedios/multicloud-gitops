@@ -3,4 +3,4 @@ mountPath: "hub"
 mountRole: "hub-role"
 
 global:
-  hubClusterDomain: apps.ocp411.datamulticloud.com
+  hubClusterDomain: "apps.ocp411.datamulticloud.com"
