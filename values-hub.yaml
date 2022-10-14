@@ -22,7 +22,7 @@ clusterGroup:
       name: rhacs-operator
       namespace: rhacs-operator
       channel: rhacs-3.72
-      csv: rhacs-operator.v3.72
+      csv: rhacs-operator.v3.72.0
 
   projects:
   - hub
