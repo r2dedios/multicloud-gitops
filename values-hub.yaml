@@ -17,6 +17,11 @@ clusterGroup:
       namespace: open-cluster-management
       channel: release-2.6
       #csv: advanced-cluster-management.v2.6.1
+    acs:
+      name: rhacs-operator
+      namespace: openshift-operators
+      channel: rhacs-3.71
+      csv: rhacs-operator.v3.71
 
   projects:
   - hub
