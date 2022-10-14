@@ -10,6 +10,7 @@ clusterGroup:
   - vault
   - golang-external-secrets
   - config-demo
+  - rhacs-operator
 
   subscriptions:
     acm:
@@ -19,7 +20,7 @@ clusterGroup:
       #csv: advanced-cluster-management.v2.6.1
     acs:
       name: rhacs-operator
-      namespace: rhacs-operators
+      namespace: rhacs-operator
       channel: rhacs-3.72
       csv: rhacs-operator.v3.72
 
