@@ -20,7 +20,7 @@ clusterGroup:
       #csv: advanced-cluster-management.v2.6.1
     acs:
       name: rhacs-operator
-      namespace: rhacs-operator
+      namespace: openshift-operators
       channel: rhacs-3.72
       csv: rhacs-operator.v3.72.0
 
