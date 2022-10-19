@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "8"
+  name: stackrox-token
+  namespace: stackrox
+spec:
+  template:
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/openshift/cli-tools:latest 
+        command:
+        - /bin/bash
+        - -c
+        - |
+          ACSTOKEN=$(curl -sk -u "admin:$(oc extract secret/central-htpasswd --keys=password --to=-)" "https://central-stackrox.{{ .Values.hubClusterDomain }}/v1/apitokens/generate" -d '{"name":"token name", "role": "Admin"}' | jq -r '.token')
+          oc create secret -n stackrox generic acs-api-token --from-literal=token=$ACSTOKEN
+        name: stackrox-token
+      dnsPolicy: ClusterFirst
+      activeDeadlineSeconds: 300
+      restartPolicy: Never
+      serviceAccountName: stackrox-sa
+      terminationGracePeriodSeconds: 60
