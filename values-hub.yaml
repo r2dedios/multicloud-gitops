@@ -22,8 +22,8 @@ clusterGroup:
     acs:
       name: rhacs-operator
       namespace: openshift-operators
-      channel: rhacs-3.71
-      csv: rhacs-operator.v3.71
+      channel: rhacs-3.72
+      startingCSV: rhacs-operator.v3.72.0
 
   projects:
   - hub
