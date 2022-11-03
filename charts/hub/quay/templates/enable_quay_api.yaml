@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: enable-quay-api
+  namespace: quay-enterprise
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  template:
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          sleep 300 && \ 
+          oc get secret quay-temp-token -n quay-enterprise
+          if [ $? -ne 0 ]; then
+            # Invoke API and add quay user to the API - initiates API
+            JSONTOKEN=$(curl -X POST -k  https://quay-registry-quay-quay-enterprise.apps.ocp410.datamulticloud.com/api/v1/user/initialize --header 'Content-Type: application/json' --data '{ "username": "quayadmin", "password":"quayadmin123", "email": "quayadmin@example.com", "access_token": true}') && \
+            oc create secret generic quay-temp-token --from-literal=token=$JSONTOKEN -n quay-enterprise
+          fi
+          oc get secret -n openshift-operators quay-integration
+          if [ $? -ne 0 ]; then
+            TOKEN=$(oc extract secret/quay-temp-token --keys=token --to=- -n quay-enterprise | grep access_token | cut -d : -f2 | awk -F\" '{print $2}') && \
+            oc create secret -n openshift-operators generic quay-integration --from-literal=token=$TOKEN
+          fi
+          echo "Enable QUAY API Job completed successfully"
+        name: quay-api-enablement
+      dnsPolicy: ClusterFirst
+      activeDeadlineSeconds: 900
+      restartPolicy: Never
+      serviceAccountName: quay-admin
+      terminationGracePeriodSeconds: 60

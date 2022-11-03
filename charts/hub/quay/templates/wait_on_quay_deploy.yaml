@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "4"
+  name: wait-for-quay-app-deploy
+  namespace: quay-enterprise
+spec:
+  template:
+    spec:
+      containers: 
+      - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          # wait for the operator QuayRegistry CR to be available
+          oc wait QuayRegistry quay-registry --for=condition=Available=true
+        name: wait-for-quay-app
+      dnsPolicy: ClusterFirst
+      activeDeadlineSeconds: 900
+      restartPolicy: Never
+      serviceAccountName: quay-admin
+      terminationGracePeriodSeconds: 60

@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "2"
+  name: wait-for-storage-cluster
+  namespace: openshift-storage
+spec:
+  template:
+    spec:
+      containers: 
+      - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          sleep 180
+          # wait for the Storage Cluster to be available
+          oc wait storagecluster ocs-storagecluster --for=condition=Available=true -n openshift-storage
+        name: wait-for-storage-cluster
+      dnsPolicy: ClusterFirst
+      activeDeadlineSeconds: 1500
+      restartPolicy: Never
+      serviceAccountName: label-storage-nodes
+      terminationGracePeriodSeconds: 60
