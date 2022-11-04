@@ -59,12 +59,6 @@ clusterGroup:
       namespace: config-demo
       project: config-demo
       path: charts/all/config-demo
-    
-    image-tool:
-      name: image-tool
-      namespace: image-tool
-      project: image-tool
-      path: charts/all/image-tool
    
     odf:
       name: odf
