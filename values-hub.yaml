@@ -21,6 +21,10 @@ clusterGroup:
       namespace: open-cluster-management
       channel: release-2.6
       #csv: advanced-cluster-management.v2.4.1
+    quay:
+      name: quay-operator
+      namespace: openshift-operators
+      channel: stable-3.7
 
   projects:
   - hub
