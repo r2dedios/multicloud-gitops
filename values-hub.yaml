@@ -10,17 +10,25 @@ clusterGroup:
   - vault
   - golang-external-secrets
   - config-demo
+  - openshift-storage
+  - openshift-local-storage
+  - image-tool
+  - quay-enterprise
 
   subscriptions:
     acm:
       name: advanced-cluster-management
       namespace: open-cluster-management
-      channel: release-2.6
-      #csv: advanced-cluster-management.v2.6.1
+      channel: release-2.4
+      #csv: advanced-cluster-management.v2.4.1
 
   projects:
   - hub
   - config-demo
+  - lso
+  - odf
+  - image-tool
+  - quay-enterprise
 
   applications:
     acm:
@@ -51,6 +59,25 @@ clusterGroup:
       namespace: config-demo
       project: config-demo
       path: charts/all/config-demo
+    
+    image-tool:
+      name: image-tool
+      namespace: image-tool
+      project: image-tool
+      path: charts/all/image-tool
+   
+    odf:
+      name: odf
+      namespace: openshift-storage
+      project: odf
+      path: charts/hub/odf
+   
+    quay:
+      name: quay
+      namespace: quay-enterprise
+      project: quay-enterprise
+      path: charts/hub/quay
+
 
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
@@ -76,6 +103,24 @@ clusterGroup:
       helmOverrides:
       - name: clusterGroup.isHubCluster
         value: false
+
+    azure:
+      name: azure
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      labels:
+      - name: clusterSelector
+        value: azure
+
+    gcp:
+      name: gcp
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      labels:
+      - name: clusterSelector
+        value: gcp
 
       # Before enabling cluster provisioning, ensure AWS and/or Azure
       #   credentials and OCP pull secrets are defined in Vault.

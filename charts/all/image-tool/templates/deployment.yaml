@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.deploy.name }}
+  name: {{ .Values.deploy.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.deploy.name }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.deploy.name }}
+    spec:
+      containers:
+      - name: {{ .Values.deploy.name }}
+        image: {{ .Values.deploy.image }}
+        ports:
+        - containerPort: {{ .Values.deploy.containerPort }}
+        resources: {}
+        volumeMounts:
+        - name: {{ .Values.deploy.volumeMounts.name }}
+          mountPath: {{ .Values.deploy.volumeMounts.mountPath }}
+      volumes:
+      - name: {{ .Values.deploy.volumes.name }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.deploy.volumes.claimName }}
+      securityContext: {}
+      serviceAccount: {{ .Values.deploy.serviceAccount }}
+      serviceAccountName: {{ .Values.deploy.securityAccount }}

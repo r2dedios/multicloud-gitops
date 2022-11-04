@@ -1,0 +1,30 @@
+global:
+  options:
+    useCSV: False
+    syncPolicy: Automatic
+    installPlanApproval: Automatic
+
+clusterGroup:
+  name: azure
+  isHubCluster: false
+
+  namespaces:
+    - openshift-storage
+    - image-tool
+
+  subscriptions:
+
+  projects:
+    - odf
+    - image-tool
+
+  applications:
+  - name: odf
+    namespace: openshift-storage
+    project: odf
+    path: charts/azure/odf
+
+  - name: image-tool
+    namespace: image-tool
+    project: image-tool
+    path: charts/all/image-tool

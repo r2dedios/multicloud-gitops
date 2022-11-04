@@ -1,0 +1,43 @@
+deploy:
+  name: image-tool-pvc
+  image: quay.io/gmidha/image-tool:latest
+  containerPort: 5000
+  volumeMounts:
+    name: image-tool-storage
+    mountPath: /var/storage
+  volumes: 
+    name: image-tool-storage
+    claimName: image-tool
+  serviceAccount: image-tool
+pvc:
+  name: image-tool
+  accessModes: ReadWriteMany
+  storageClassName: ocs-storagecluster-cephfs
+  storage: 1Gi
+route:
+  name: image-tool-pvc
+  tls: 
+    termination: edge
+  service: image-tool-pvc
+service:
+  name: image-tool-pvc
+  port: 80
+  protocol: TCP
+  targetPort: 5000
+serviceAccount:
+  name: image-tool
+nginx:
+  name: nginx
+  image: quay.io/gmidha/nginx:autoindex
+  containerPort: 8080
+  volumeMounts:
+    name: persistent-storage
+    mountPath: "/opt/app-root/src/www"
+  volumes:
+    name: persistent-storage
+    claimName: image-tool
+  serviceAccount: image-tool
+  port: 80
+  protocol: TCP
+  targetPort: 8080
+  type: LoadBalancer
