@@ -14,7 +14,7 @@ spec:
         - /bin/bash
         - -c
         - |
-          sleep 300 && \ 
+          sleep 300 \ 
           echo https://quay-registry-quay-quay-enterprise.{{ .Values.global.hubClusterDomain }}/api/v1/user/initialize
           oc get secret quay-temp-token -n quay-enterprise \
           if [ $? -ne 0 ]; then
