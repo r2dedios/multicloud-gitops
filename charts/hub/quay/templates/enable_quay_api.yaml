@@ -15,7 +15,8 @@ spec:
         - -c
         - |
           sleep 300 && \ 
-          oc get secret quay-temp-token -n quay-enterprise
+          echo https://quay-registry-quay-quay-enterprise.{{ .Values.global.hubClusterDomain }}/api/v1/user/initialize
+          oc get secret quay-temp-token -n quay-enterprise \
           if [ $? -ne 0 ]; then
             # Invoke API and add quay user to the API - initiates API
             JSONTOKEN=$(curl -X POST -k  https://quay-registry-quay-quay-enterprise.{{ .Values.global.hubClusterDomain }}/api/v1/user/initialize --header 'Content-Type: application/json' --data '{ "username": "quayadmin", "password":"quayadmin123", "email": "quayadmin@example.com", "access_token": true}') && \
