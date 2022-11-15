@@ -4,7 +4,7 @@ metadata:
   name: enable-quay-api
   namespace: quay-enterprise
   annotations:
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "6"
 spec:
   template:
     spec:
@@ -13,8 +13,7 @@ spec:
         command:
         - /bin/bash
         - -c
-        - |
-          sleep 300 
+        - | 
           echo https://quay-registry-quay-quay-enterprise.{{ .Values.global.hubClusterDomain }}/api/v1/user/initialize
           oc get secret quay-temp-token -n quay-enterprise
           if [ $? -ne 0 ]; then
