@@ -108,7 +108,7 @@ clusterGroup:
       - name: clusterGroup.isHubCluster
         value: false
       labels:
-      - name: clusterSelector
+      - name: clusterGroup
         value: azure
 
     gcp:
@@ -117,7 +117,7 @@ clusterGroup:
       - name: clusterGroup.isHubCluster
         value: false
       labels:
-      - name: clusterSelector
+      - name: clusterGroup
         value: gcp
 
       # Before enabling cluster provisioning, ensure AWS and/or Azure
