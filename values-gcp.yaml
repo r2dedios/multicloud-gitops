@@ -1,0 +1,23 @@
+global:
+  options:
+    useCSV: False
+    syncPolicy: Automatic
+    installPlanApproval: Automatic
+
+clusterGroup:
+  name: gcp
+  isHubCluster: false
+
+  namespaces:
+    - bubble-animation
+
+  projects:
+    - bubble-animation
+
+  applications:
+    bubble-app:
+      name: bubble-app
+      namespace: bubble-animation
+      project: bubble-animation
+      path: charts/gcp/bubble-animation
+

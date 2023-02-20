@@ -90,6 +90,24 @@ clusterGroup:
       - name: clusterGroup.isHubCluster
         value: false
 
+    azure:
+      name: azure
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      clusterSelector:
+        matchLabels:
+          clusterGroup: azure
+
+    gcp:
+      name: gcp
+      helmOverrides:
+      - name: clusterGroup.isHubCluster
+        value: false
+      clusterSelector:
+        matchLabels:
+          clusterGroup: gcp        
+
       # Before enabling cluster provisioning, ensure AWS and/or Azure
       #   credentials and OCP pull secrets are defined in Vault.
       #   See values-secret.yaml.template
