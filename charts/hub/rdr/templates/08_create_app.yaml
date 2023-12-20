@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ggithubcom-ramendr-ocm-ramen-samples-ns
+  name: busybox-ns
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
