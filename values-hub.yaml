@@ -18,7 +18,7 @@ clusterGroup:
       channel: release-2.9
       #csv: advanced-cluster-management.v2.9.1
     drhub:
-      name: dr-hub-operator
+      name: odr-hub-operator
       namespace: openshift-dr-system
       channel: stable-4.14
 
