@@ -9,6 +9,7 @@ clusterGroup:
     - config-demo
     - hello-world
     - bubble-animation
+    - regional-dr
 
   subscriptions:
     acm:
@@ -21,6 +22,7 @@ clusterGroup:
     - hub
     - config-demo
     - hello-world
+    - rdr
     - bubble-animation
 
   applications:
@@ -43,7 +45,7 @@ clusterGroup:
 
     rdr:
       name: rdr
-      namespace: regionaldr
+      namespace: regional-dr
       project: rdr
       path: charts/hub/rdr
 
