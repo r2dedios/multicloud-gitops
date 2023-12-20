@@ -10,13 +10,16 @@ global:
 main:
   clusterGroupName: hub
 
+clusterSet:
+  name: dr
+
 managed1:
   name: dr-alpha
-  clusterset: rdr
+  clusterset: dr
 
 managed2:
   name: dr-beta
-  clusterset: rdr
+  clusterset: dr
 
 secretStore:
   name: vault-backend

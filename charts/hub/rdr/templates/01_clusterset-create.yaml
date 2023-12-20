@@ -1,6 +1,6 @@
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: ManagedClusterSet
 metadata:
-  name: replica
+  name: {{ .Values.clusterSet.name }}
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
