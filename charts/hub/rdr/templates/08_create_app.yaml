@@ -26,7 +26,7 @@ metadata:
   annotations:
     apps.open-cluster-management.io/reconcile-rate: medium
   name: ggithubcom-ramendr-ocm-ramen-samples
-  namespace: ggithubcom-ramendr-ocm-ramen-samples-ns
+  namespace: busybox-ns
 spec:
   type: Git
   pathname: 'https://github.com/RamenDR/ocm-ramen-samples'
@@ -43,7 +43,7 @@ metadata:
   name: busybox-subscription-1
   namespace: busybox-ns
 spec:
-  channel: ggithubcom-ramendr-ocm-ramen-samples-ns/ggithubcom-ramendr-ocm-ramen-samples
+  channel: busybox-ns/ggithubcom-ramendr-ocm-ramen-samples
   placement:
     placementRef:
       kind: PlacementRule
