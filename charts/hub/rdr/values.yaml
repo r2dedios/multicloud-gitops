@@ -1,0 +1,18 @@
+---
+managed1:
+  name: cluster1
+  url: https://abc.cluster
+  user: kubeadmin
+  pwd: abc
+  clusterset: replica
+
+managed2:
+  name: cluster2
+  url: https://def.cluster
+  user: kubeadmin
+  pwd: def
+  clusterset: replica
+
+secretStore:
+  name: vault-backend
+  kind: ClusterSecretStore

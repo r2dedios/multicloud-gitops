@@ -1,0 +1,12 @@
+---
+managed1:
+  name: dr-alpha
+  clusterset: rdr
+
+managed2:
+  name: dr-beta
+  clusterset: rdr
+
+secretStore:
+  name: vault-backend
+  kind: ClusterSecretStore
