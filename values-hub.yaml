@@ -14,8 +14,8 @@ clusterGroup:
     acm:
       name: advanced-cluster-management
       namespace: open-cluster-management
-      channel: release-2.6
-      #csv: advanced-cluster-management.v2.6.1
+      channel: release-2.9
+      #csv: advanced-cluster-management.v2.9.1
 
   projects:
     - hub
@@ -40,6 +40,12 @@ clusterGroup:
       namespace: vault
       project: hub
       path: common/hashicorp-vault
+
+    rdr:
+      name: rdr
+      namespace: regionaldr
+      project: rdr
+      path: charts/hub/rdr
 
     golang-external-secrets:
       name: golang-external-secrets
@@ -85,7 +91,7 @@ clusterGroup:
       name: group-one
       labels:
       - name: clusterGroup
-        value: group-one
+        value: rdr
       helmOverrides:
       - name: clusterGroup.isHubCluster
         value: false
