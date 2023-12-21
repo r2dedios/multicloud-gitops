@@ -13,7 +13,7 @@ spec:
   #action: Failover
   failoverCluster: {{ .Values.managed2.name }}
   drPolicyRef:
-    name: drsync2m
+    name: drsync5m
   placementRef:
     kind: PlacementRule
     name: pacman-placement-1
